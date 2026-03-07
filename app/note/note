@@ -1,0 +1,25 @@
+boutton archive : par exemple données (année scolaire 2023-2024)
+itineraire (par rapport à la  position actuelle et entré point de depart et etablissement(arrivée))
+hebergement gratuit (firebase )
+
+
+
+
+
+
+Préscolaire public : PS à 7ème seulement
+
+Préscolaire privé : Toutes les classes (PS à Terminale)
+
+Primaire public : 12ème à 7ème seulement
+
+Primaire privé : 12ème à 7ème + 6ème à Terminale
+
+Collège public : 6ème à 3ème seulement
+
+Collège privé : 6ème à 3ème + Seconde à Terminale  ET 12 eme jusqu'au 7 eme s'il existe dans le csv
+
+Lycée public : Seconde à Terminale seulement
+
+Lycée privé : Seconde à Terminale  12 EME  jusqu'au 3eme s'il existe  dans le csv
+Nom	 CISCO	 Secteur	 Élèves	 Classes	 Actions (effacer le colonne Classes)

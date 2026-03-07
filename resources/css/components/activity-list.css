@@ -1,0 +1,229 @@
+/* ressources/css/components/activity-list.css */
+.activities-section {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+.activities-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.activities-title {
+    font-size: 1.3em;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.activities-count {
+    background: #3498db;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.activities-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-refresh {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.3s;
+}
+
+.btn-refresh:hover {
+    background: #7f8c8d;
+}
+
+.activities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.activity-item:hover {
+    transform: translateX(5px);
+    background: #e8f4fd;
+}
+
+.activity-item.super-admin {
+    border-left-color: #f39c12;
+}
+
+.activity-item.admin {
+    border-left-color: #3498db;
+}
+
+.activity-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-admin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.admin-role-badge {
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.7em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+}
+
+.super-admin .admin-role-badge {
+    background: #f39c12;
+}
+
+.admin .admin-role-badge {
+    background: #3498db;
+}
+
+.admin-name {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 1em;
+}
+
+.activity-page {
+    font-weight: 500;
+    color: #34495e;
+    margin-bottom: 4px;
+    font-size: 1em;
+}
+
+.activity-url {
+    font-size: 0.85em;
+    color: #7f8c8d;
+    word-break: break-all;
+    opacity: 0.8;
+}
+
+.activity-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+    min-width: 120px;
+    text-align: right;
+}
+
+.activity-time {
+    background: #27ae60;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.activity-date {
+    color: #7f8c8d;
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #7f8c8d;
+}
+
+.empty-state .icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+
+.empty-state .small {
+    font-size: 0.9em;
+    opacity: 0.7;
+}
+
+/* Scrollbar personnalisée */
+.activities-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.activities-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.activities-list::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.activities-list::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .activity-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .activity-details {
+        align-items: flex-start;
+        min-width: auto;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .activities-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .activities-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

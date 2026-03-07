@@ -1,0 +1,308 @@
+/* 
+ * fixes.css - Correctifs CSS pour Dashboard Éducation
+ * Résout les warnings Bootstrap et améliore la compatibilité
+ */
+
+/* ==========================================================================
+   CORRECTIONS DES PROPRIÉTÉS OBSOLÈTES
+   ========================================================================== */
+
+/* 1. Correction de -webkit-text-size-adjust */
+.text-size-adjust,
+html,
+body {
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%; /* Pour compatibilité anciens navigateurs */
+}
+
+/* 2. Remplacement des propriétés -moz- column-gap obsolètes */
+.gap-fix,
+.row,
+.d-grid,
+.d-flex {
+    gap: var(--bs-gutter-x, 0.5rem);
+}
+
+.column-gap-fix,
+.grid {
+    column-gap: var(--bs-gutter-x, 0.5rem);
+}
+
+/* 3. Correction des propriétés -moz- pour les utilitaires Bootstrap */
+.gap-0 { gap: 0 !important; }
+.gap-1 { gap: 0.25rem !important; }
+.gap-2 { gap: 0.5rem !important; }
+.gap-3 { gap: 1rem !important; }
+.gap-4 { gap: 1.5rem !important; }
+.gap-5 { gap: 3rem !important; }
+
+.column-gap-0 { column-gap: 0 !important; }
+.column-gap-1 { column-gap: 0.25rem !important; }
+.column-gap-2 { column-gap: 0.5rem !important; }
+.column-gap-3 { column-gap: 1rem !important; }
+.column-gap-4 { column-gap: 1.5rem !important; }
+.column-gap-5 { column-gap: 3rem !important; }
+
+/* ==========================================================================
+   CORRECTIONS DES PSEUDO-CLASSES NON STANDARD
+   ========================================================================== */
+
+/* 4. Remplacement de -moz-placeholder-shown */
+.form-control:placeholder-shown {
+    text-overflow: ellipsis;
+}
+
+.form-control::placeholder {
+    color: #6c757d;
+    opacity: 1;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+/* 5. Remplacement de -moz-focus-inner et -moz-focus-outer */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.btn:focus {
+    outline: none;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.btn:focus-visible {
+    outline: 2px solid #0d6efd;
+    outline-offset: 2px;
+}
+
+/* Style spécifique pour les boutons Bootstrap */
+.btn:focus-visible {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* ==========================================================================
+   OPTIMISATIONS LEAFLET
+   ========================================================================== */
+
+/* 6. Correction image-rendering pour Leaflet */
+.leaflet-container {
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.leaflet-tile {
+    image-rendering: crisp-edges;
+}
+
+/* 7. Suppression des propriétés IE obsolètes dans Leaflet */
+.leaflet-container {
+    behavior: auto !important;
+    filter: none !important;
+}
+
+.leaflet-oldie .leaflet-container {
+    behavior: url(#default#VML);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#3F000000', EndColorStr='#3F000000');
+}
+
+/* 8. Amélioration des popups Leaflet */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.leaflet-popup-content {
+    margin: 8px 12px;
+    line-height: 1.4;
+}
+
+.leaflet-popup-tip {
+    box-shadow: none;
+}
+
+/* ==========================================================================
+   OPTIMISATIONS TYPOGRAPHIQUES
+   ========================================================================== */
+
+/* 9. Correction -moz-osx-font-smoothing */
+.body-fix,
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* 10. Amélioration de la lisibilité */
+.smooth-text {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   CORRECTIONS RESPONSIVES
+   ========================================================================== */
+
+/* 11. Correction pour les anciens navigateurs WebKit */
+@media not all and (min-resolution: 0.001dpcm) {
+    .leaflet-container {
+        image-rendering: auto;
+    }
+}
+
+/* 12. Support pour les navigateurs très anciens */
+@supports not (gap: 1px) {
+    .gap-fix > * {
+        margin: calc(var(--bs-gutter-x, 0.5rem) / 2);
+    }
+}
+
+/* ==========================================================================
+   CORRECTIONS SPÉCIFIQUES AU TABLEAU DE BORD
+   ========================================================================== */
+
+/* 13. Optimisation des cartes de statistiques */
+.stats-card {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 14. Correction des filtres de carte */
+.map-filters-container * {
+    box-sizing: border-box;
+}
+
+.map-filters-card .form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+}
+
+/* 15. Optimisation des transitions */
+.level-btn,
+.btn-details,
+.btn-localisation,
+.stats-card {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* 16. Correction des ombres portées */
+.card,
+.stats-card,
+.map-filters-card {
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    -moz-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 17. Optimisation des performances de rendu */
+.dashboard-container {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* ==========================================================================
+   CORRECTIONS D'ACCESSIBILITÉ
+   ========================================================================== */
+
+/* 18. Amélioration du contraste pour l'accessibilité */
+@media (prefers-contrast: high) {
+    .btn-primary {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+    
+    .btn-success {
+        background-color: #1e7e34;
+        border-color: #1e7e34;
+    }
+}
+
+/* 19. Support mode réduit de mouvement */
+@media (prefers-reduced-motion: reduce) {
+    .level-btn,
+    .btn-details,
+    .btn-localisation,
+    .stats-card {
+        transition: none;
+    }
+    
+    .spinner-border {
+        animation-duration: 0s;
+    }
+}
+
+/* 20. Correction pour les lecteurs d'écran */
+.visually-hidden {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* ==========================================================================
+   CORRECTIONS IMPRESSION
+   ========================================================================== */
+
+@media print {
+    .leaflet-container,
+    .map-container {
+        display: none !important;
+    }
+    
+    .btn,
+    .level-btn {
+        display: none !important;
+    }
+    
+    .stats-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+}
+
+/* ==========================================================================
+   CORRECTIONS SPÉCIFIQUES FIREFOX
+   ========================================================================== */
+
+@-moz-document url-prefix() {
+    /* Corrections spécifiques Firefox */
+    .form-control {
+        -moz-appearance: none;
+    }
+    
+    .btn {
+        -moz-appearance: none;
+    }
+    
+    .leaflet-container {
+        image-rendering: crisp-edges;
+    }
+}
+
+/* ==========================================================================
+   CORRECTIONS SPÉCIFIQUES SAFARI
+   ========================================================================== */
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .form-control {
+        -webkit-appearance: none;
+    }
+    
+    .stats-card {
+        -webkit-transform: translateZ(0);
+    }
+}
+
+/* ==========================================================================
+   FIN DU FICHIER FIXES.CSS
+   ========================================================================== */

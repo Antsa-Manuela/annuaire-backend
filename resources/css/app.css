@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.btn-green {
+    background-color: #16a34a;
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: #15803d;
+}
+
+.btn-blue {
+    background-color: #2563eb;
+    color: white;
+}
+
+.btn-blue:hover {
+    background-color: #1d4ed8;
+}

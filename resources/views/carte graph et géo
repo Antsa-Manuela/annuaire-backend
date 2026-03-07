@@ -1,0 +1,130 @@
+        <!-- Sélecteur de niveau -->
+        <div class="level-selector mb-3">
+            <div class="d-flex justify-content-center">
+                <div class="btn-group btn-group-lg" role="group" aria-label="Sélecteur de niveau scolaire">
+                    <!-- Préscolaire -->
+                    <button type="button" class="level-btn btn border-start border-top border-bottom rounded-start-pill px-4 py-3 d-flex align-items-center active" 
+                            data-level="prescolaire">
+                        <i class="fas fa-baby me-3 fa-lg"></i>
+                        <div class="text-start">
+                            <div class="fw-bold">Préscolaire</div>
+                        </div>
+                    </button>
+                    
+                    <!-- Primaire -->
+                    <button type="button" class="level-btn btn border-start border-top border-bottom px-4 py-3 d-flex align-items-center"
+                            data-level="primaire">
+                        <i class="fas fa-child me-3 fa-lg"></i>
+                        <div class="text-start">
+                            <div class="fw-bold">Primaire</div>
+                        </div>
+                    </button>
+                    
+                    <!-- Collège -->
+                    <button type="button" class="level-btn btn border-start border-top border-bottom px-4 py-3 d-flex align-items-center" data-level="college">
+                        <i class="fas fa-user-graduate me-3 fa-lg"></i>
+                        <div class="text-start">
+                            <div class="fw-bold">Collège</div>
+                        </div>
+                    </button>
+                    
+                    <!-- Lycée -->
+                    <button type="button" class="level-btn btn border border-top border-bottom rounded-end-pill px-4 py-3 d-flex align-items-center"
+                            data-level="lycee">
+                        <i class="fas fa-graduation-cap me-3 fa-lg"></i>
+                        <div class="text-start">
+                            <div class="fw-bold">Lycée</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtres -->
+        <div class="filter-container mb-3 mx-auto w-75">
+            <div class="row g-2 align-items-end justify-content-center">
+                <div class="col-md-4">
+                    <label class="form-label" style="color: #3E6E4B; font-size: 0.9rem;">CISCO</label>
+                    <select class="form-select" id="ciscoFilter" style="border-color: #D0E0C0; background-color: #FFFFFF;">
+                        <option value="all">Toutes les CISCO</option>
+                        <option value="AMBATOLAMPY">AMBATOLAMPY</option>
+                        <option value="ANTANIFOTSY">ANTANIFOTSY</option>
+                        <option value="ANTSIRABE I">ANTSIRABE I</option>
+                        <option value="ANTSIRABE II">ANTSIRABE II</option>
+                        <option value="BETAFO">BETAFO</option>
+                        <option value="FARATSIHO">FARATSIHO</option>
+                        <option value="MANDOTO">MANDOTO</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label" style="color: #3E6E4B; font-size: 0.9rem;">Secteur</label>
+                    <select class="form-select" id="secteurFilter" style="border-color: #D0E0C0; background-color: #FFFFFF;">
+                        <option value="all">Tous secteurs</option>
+                        <option value="Publique">Public</option>
+                        <option value="Privée">Privé</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <button class="btn btn-filter-custom d-flex align-items-center justify-content-center" 
+                                onclick="window.dashboard.applyFilters()" 
+                                style="width: 40px; height: 40px; border-radius: 4px;">
+                            <i class="fas fa-filter" style="font-size: 0.9rem;"></i>
+                        </button>
+                        <button class="btn btn-clear-custom d-flex align-items-center justify-content-center"
+                                onclick="window.dashboard.clearFilters()"
+                                style="width: 40px; height: 40px; border-radius: 4px;">
+                            <i class="fas fa-times" style="font-size: 0.9rem;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartes de statistiques -->
+        <div class="stats-cards mb-4">
+            <div class="row g-2" id="statsContainer">
+                <!-- Les statistiques seront chargées dynamiquement -->
+                <div class="col-12 text-center py-4">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-2 text-muted">Chargement des données Préscolaire...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Itinéraire Summary -->
+        <div id="itineraireSummary" class="mb-4"></div>
+
+        <!-- Carte seule en haut -->
+        <div class="row mb-4 g-2">
+            <!-- Carte -->
+            <div class="col-12 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header py-2 d-flex justify-content-between align-items-center">
+                        <span style="color: #3E6E4B; font-size: 0.9rem;">
+                            <i class="fas fa-map me-2"></i>
+                            <span id="mapHeader" class="fw-bold">Carte des Établissements Préscolaire</span>
+                        </span>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-filter-custom px-2 py-1" onclick="window.dashboard.exportToCSV()" 
+                                    style="font-size: 0.75rem;">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-clear-custom px-2 py-1" onclick="refreshData()"
+                                    style="font-size: 0.75rem;">
+                                <i class="fas fa-sync"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0 position-relative" style="height: 400px;">
+                        <div id="map" class="h-100"></div>
+                        <!-- Bouton d'effacement d'itinéraire -->
+                        <button id="clearRouteBtn" class="btn btn-sm position-absolute top-0 end-0 m-2" 
+                                style="display: none; background-color: #FFFFFF; color: #3E6E4B; border-color: #3E6E4B; font-size: 0.7rem; padding: 2px 6px;"
+                                onclick="window.dashboard.clearItineraire()">
+                            <i class="fas fa-times me-1"></i>Effacer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
