@@ -1,5 +1,5 @@
 <?php
-
+// backend\app\Http\Controllers\Auth\RegisterController.php
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
