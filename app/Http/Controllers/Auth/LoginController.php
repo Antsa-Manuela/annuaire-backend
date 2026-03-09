@@ -1,69 +1,42 @@
 <?php
 // backend/app/Http/Controllers/Auth/LoginController.php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
-use App\Models\User;
+use App\Models\Admin;
 
 class LoginController extends Controller
 {
-    /**
-     * Affiche le formulaire de connexion
-     */
-    public function showLoginForm()
-    {
-        return view('auth.login'); // Vérifie que login.blade.php est dans resources/views/auth/
-    }
-
-    /**
-     * Traite la connexion
-     */
     public function login(Request $request)
     {
         $request->validate([
             'email' => ['nullable','email'],
-            'cin'   => ['nullable','string'],
+            'cin' => ['nullable','string'],
             'password' => ['required','string'],
         ]);
 
-        $identifier = [];
+        $admin = null;
 
-        if($request->filled('email')){
-            $identifier['email'] = $request->email;
-        } elseif($request->filled('cin')){
-            $identifier['cin'] = $request->cin;
+        if ($request->filled('email')) {
+            $admin = Admin::where('email', $request->email)->first();
+        } elseif ($request->filled('cin')) {
+            $admin = Admin::where('cin', $request->cin)->first();
         }
 
-        $user = User::where($identifier)->first();
-
-        if(!$user || !Hash::check($request->password, $user->password)){
+        if (!$admin || !Hash::check($request->password, $admin->password)) {
             return response()->json([
                 'message' => 'Identifiants incorrects'
-            ],401);
+            ], 401);
         }
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $admin->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'user' => $user,
+            'admin' => $admin,
             'token' => $token
         ]);
-    }
-
-    /**
-     * Déconnexion
-     */
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect()->route('login');
     }
 }
