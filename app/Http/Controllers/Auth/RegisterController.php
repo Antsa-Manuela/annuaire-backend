@@ -12,13 +12,6 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
-        // vérifier si un admin existe déjà
-/*         if (Admin::where('is_active', true)->exists()) {
-            return response()->json([
-                'message' => 'Un administrateur actif existe déjà.'
-            ], 403);
-        } */
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'cin' => 'required|string|unique:admins',

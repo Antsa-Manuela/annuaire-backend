@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExcelController;
-use App\Models\User;
+use App\Models\Admin;
 
 // 🔹 PUBLIC ROUTES
 
@@ -15,7 +15,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 // 🔹 TEST API (liste utilisateurs)
 
 Route::get('/users', function () {
-    return response()->json(User::all());
+    return response()->json(Admin::all());
 });
 
 
