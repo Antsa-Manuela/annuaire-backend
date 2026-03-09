@@ -1,11 +1,10 @@
 <?php
-// backend/routes/api.php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExcelController;
-use App\Http\Controllers\ImportController;
 use App\Models\User;
 
 // 🔹 PUBLIC ROUTES
@@ -13,13 +12,14 @@ use App\Models\User;
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
 
-// 🔹 TEST : récupérer tous les utilisateurs
+// 🔹 TEST API (liste utilisateurs)
+
 Route::get('/users', function () {
-    return User::all();
+    return response()->json(User::all());
 });
 
 
-// 🔹 PROTECTED ROUTES (nécessitent un token Sanctum)
+// 🔹 ROUTES PROTÉGÉES (Sanctum)
 
 Route::middleware('auth:sanctum')->group(function () {
 
