@@ -23,10 +23,12 @@ RUN php artisan config:clear \
  && php artisan route:clear \
  && php artisan view:clear
 
-# Permissions (Render exécute en container)
+# Permissions
 RUN chmod -R 777 storage bootstrap/cache || true
 
 EXPOSE 8080
 
-# Démarrage : migrations puis serveur
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8080
+# Démarrage : migrations, seeder, puis serveur
+CMD php artisan migrate --force && \
+    php artisan db:seed --class=SuperAdminSeeder --force && \
+    php artisan serve --host=0.0.0.0 --port=8080
