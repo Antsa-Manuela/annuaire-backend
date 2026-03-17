@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExcelController;
-use App\Http\Controllers\Api\SuperAdminAuthController;
+use App\Http\Controllers\Auth\SuperAdminAuthController;
 
 // 🔹 DIAGNOSTIC : Vérification de la base de données et des tables critiques
 Route::get('/test-db', function () {
