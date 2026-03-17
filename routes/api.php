@@ -1,12 +1,34 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use App\Models\Admin;
+use App\Models\SuperAdmin;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\DashboardController;
+use Http\Controllers\DashboardController;
 use App\Http\Controllers\ExcelController;
-use App\Http\Controllers\Api\SuperAdminAuthController; // 👈 Import du contrôleur API super admin
-use App\Models\Admin;
+use App\Http\Controllers\Api\SuperAdminAuthController;
+
+// 🔹 DIAGNOSTIC : Vérification de la base de données
+Route::get('/test-db', function () {
+    try {
+        DB::connection()->getPdo();
+        return response()->json([
+            'status' => 'connected',
+            'database' => DB::connection()->getDatabaseName(),
+            'super_admins_table_exists' => Schema::hasTable('super_admins'),
+            'super_admins_count' => SuperAdmin::count(),
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'trace' => $e->getTraceAsString()
+        ], 500);
+    }
+});
 
 // 🔹 ROUTES PUBLIQUES
 Route::post('/login', [LoginController::class, 'login']);
