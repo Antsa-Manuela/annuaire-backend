@@ -1,5 +1,5 @@
 <?php
-
+// backend/app/Models/SuperAdmin.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
