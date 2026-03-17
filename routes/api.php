@@ -7,11 +7,11 @@ use App\Models\Admin;
 use App\Models\SuperAdmin;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\Api\SuperAdminAuthController;
 
-// 🔹 DIAGNOSTIC : Vérification de la base de données
+// 🔹 DIAGNOSTIC : Vérification de la base de données et des tables critiques
 Route::get('/test-db', function () {
     try {
         DB::connection()->getPdo();
@@ -20,6 +20,9 @@ Route::get('/test-db', function () {
             'database' => DB::connection()->getDatabaseName(),
             'super_admins_table_exists' => Schema::hasTable('super_admins'),
             'super_admins_count' => SuperAdmin::count(),
+            'personal_access_tokens_table_exists' => Schema::hasTable('personal_access_tokens'),
+            'migrations_table_exists' => Schema::hasTable('migrations'),
+            'last_migrations' => DB::table('migrations')->orderBy('id', 'desc')->limit(5)->get(),
         ]);
     } catch (\Exception $e) {
         return response()->json([
